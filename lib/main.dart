@@ -93,7 +93,8 @@ class MyApp extends StatelessWidget {
                 child: ListView(
                   children: [
                     Card(
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8)),
                       margin: EdgeInsets.only(top: 17),
                       elevation: 14,
                       shadowColor:
