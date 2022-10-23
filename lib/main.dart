@@ -1,14 +1,20 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
-  MyApp({super.key});
+class MyApp extends StatefulWidget {
+  const MyApp({super.key});
 
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
   TextEditingController controller = TextEditingController(text: '');
-  bool value = true;
+
+  bool value = false;
 
   @override
   Widget build(BuildContext context) {
@@ -95,13 +101,19 @@ class MyApp extends StatelessWidget {
                     Card(
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(8)),
-                      margin: EdgeInsets.only(top: 17),
+                      margin: const EdgeInsets.only(top: 17),
                       elevation: 14,
                       shadowColor:
                           Color.fromARGB((0.14 * 255).toInt(), 0, 0, 0),
                       child: Row(
                         children: [
-                          Checkbox(value: value, onChanged: ((value) {})),
+                          Checkbox(
+                              value: value,
+                              onChanged: ((t) {
+                                setState(() {
+                                  value = t != null && t != true ? false : true;
+                                });
+                              })),
                           const Padding(
                             padding: EdgeInsets.all(20.0),
                             child: Text('Arrange a weekly meet.'),
