@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_animation/service.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 
 void main() {
   runApp(const MyApp());
@@ -31,8 +32,8 @@ class _MyAppState extends State<MyApp> {
 
   addApi() async {
     
-    print(now.day);
-    await adding(controller.text);
+   
+    await adding(controller.text,);
     api = await func();
     setState(() {});
     controller.text = '';
@@ -155,26 +156,33 @@ class _MyAppState extends State<MyApp> {
                               elevation: 14,
                               shadowColor:
                                   Color.fromARGB((0.14 * 255).toInt(), 0, 0, 0),
-                              child: Dismissible(
-                                key: ValueKey(api[index]),
-                                onDismissed: (direction) async{
-                                  await removing(api[index]['name']);
-                                },
-                                child: Row(
+                              child: Slidable(
+                                endActionPane: ActionPane(
+                                  motion:const StretchMotion(),
                                   children: [
-                                    Checkbox(
-                                      value: api[index]['isDone'],
-                                      onChanged: (value) {
-                                        setState(() {
-                                          api[index]['isDone']=value;
-                                        });
-                                      },
-                                    ),
-                                    Padding(
-                                      padding: EdgeInsets.all(20.0),
-                                      child: Text(api[index]['name']),
-                                    ),
+                                    SlidableAction(
+                                      icon: Icons.delete,
+                                      label: 'Delete',
+                                      onPressed: (context) {
+                                      setState(() {
+                                        removing(api[index]['name']);
+                                        addApi();
+                                        
+                                      });
+                                    },)
                                   ],
+                                ),
+                                child: ListTile(
+                                  leading: Checkbox(value: api[index]['isDone'], onChanged: (value) {
+                                    setState(() {
+                                      value1=!value1;
+                                      addStatus(value1,api[index]['name']);
+                                      
+                                      addApi();
+                                      print(api[index]['isDone']);
+                                    });
+                                  },),
+                                  title: Text(api[index]['name']),
                                 ),
                               ),
                             ),

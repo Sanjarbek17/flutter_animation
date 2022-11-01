@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
@@ -10,19 +11,36 @@ Future func()async{
   return jsonData;
 }
 
-Future adding(String title)async{
+Future adding(String title,)async{
   http.Response response=await http.post(Uri.parse('https://lidapa8228.pythonanywhere.com/api/add'),
   headers: <String, String>{
       'Content-Type': 'application/json; charset=UTF-8',
     },
     body: jsonEncode(
       {
-        'name':title
+        'name':title,
+        
       }
     )
   );
+}
+Future addStatus(bool status,String title)async{
+  http.Response response=await http.post(Uri.parse('https://lidapa8228.pythonanywhere.com/api/upd'),
+  headers: <String, String>{
+      'Content-Type': 'application/json; charset=UTF-8',
+    },
+    body: jsonEncode(
+      {
+        'name':title,
+        'isDone':status,
+        
+      }
+    )
+  );
+  print(response.body);
   
 }
+
 
 Future removing(String title)async{
   http.Response response=await http.post(Uri.parse('https://lidapa8228.pythonanywhere.com/api/del'),
