@@ -18,6 +18,7 @@ class _SignInState extends State<SignIn> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: true,
       body: Container(
         child: Column(
           children: [
@@ -71,7 +72,7 @@ class _SignInState extends State<SignIn> {
               child: ElevatedButton(
                 onPressed: () {
                   setState(() {
-                    if (username.text == '' && password.text == '') {
+                    if (username.text != '' && password.text != '') {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
