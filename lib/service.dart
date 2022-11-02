@@ -12,9 +12,7 @@ Future func() async {
   return jsonData;
 }
 
-Future adding(
-  String title,
-) async {
+Future adding(String title) async {
   http.Response response = await http.post(
       Uri.parse('https://lidapa8228.pythonanywhere.com/api/add'),
       headers: <String, String>{
@@ -38,11 +36,14 @@ Future addStatus(bool status, String title) async {
   print(response.body);
 }
 
-Future removing(String title) async {
+Future removing(String title, String username, String password) async {
   http.Response response = await http.post(
       Uri.parse('https://lidapa8228.pythonanywhere.com/api/del'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },
-      body: jsonEncode({'name': title}));
+      body: jsonEncode({
+        'name': title,
+      }));
+  print(response.body);
 }
