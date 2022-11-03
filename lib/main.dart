@@ -5,15 +5,17 @@ import 'package:flutter_animation/pages/todo_page.dart';
 
 void main() {
   runApp(
-    const MaterialApp(
+     MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: LoginPage(),
+      home: LoginPage(username: '',password: '',),
     ),
   );
 }
 
 class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
+  String username;
+  String password;
+  LoginPage({super.key,required this.password,required this.username});
 
   @override
   State<LoginPage> createState() => _LoginPageState();
@@ -67,7 +69,9 @@ class _LoginPageState extends State<LoginPage> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => SignIn(),
+                            builder: (context) => SignIn(
+                                username: widget.username,
+                                password: widget.password),
                           ));
                     });
                   },
