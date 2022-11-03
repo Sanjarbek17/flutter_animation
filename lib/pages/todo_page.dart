@@ -4,7 +4,9 @@ import 'package:flutter_animation/service.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 
 class MyApp extends StatefulWidget {
-  const MyApp({super.key});
+  String username;
+  String password;
+  MyApp({super.key, required this.username,required this.password});
 
   @override
   State<MyApp> createState() => _MyAppState();
@@ -124,7 +126,7 @@ class _MyAppState extends State<MyApp> {
                           height: 26,
                         ),
                         Text(
-                          'Good Morning, ${username.text}!',
+                          'Good Morning, ${widget.username}!',
                           style: TextStyle(
                               color: Colors.white,
                               fontSize: 28,
@@ -165,7 +167,7 @@ class _MyAppState extends State<MyApp> {
                                   onPressed: (context) {
                                     setState(() {
                                       removing(api[index]['name'],
-                                          username.text, password.text);
+                                          widget.username, widget.password);
                                       addApi();
                                     });
                                   },
